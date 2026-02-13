@@ -1,173 +1,176 @@
 # Practical Linux Labs
 
-Hands-on Linux labs designed to run inside a local Ubuntu virtual machine.
+Hands-on Linux labs that run inside a local Ubuntu virtual machine.
 
-These labs are terminal-first and focus on real Linux fundamentals:
+These labs are terminal-first and focus on core Linux fundamentals:
 
-Filesystem navigation
+* Filesystem navigation
+* Users and permissions
+* Logs
+* Services
+* Shell usage
+* System debugging
 
-Users and permissions
+Each lab is self-contained inside `/lab` and includes:
 
-Logs
+```
+README.txt        # Context
+OBJECTIVES.txt    # Completion requirements
+HINTS.txt         # Optional guidance
+SIDE_QUESTS.txt   # Optional exploration
+check.sh          # Grading script
+```
 
-Services
+---
 
-Shell usage
+# Supported Platforms
 
-System debugging
+The labs run inside Ubuntu.
+The launch method depends on your host system.
 
-Each lab is self-contained inside /lab and includes:
+---
 
-README.txt – context
+## Windows / Linux / Intel Mac
 
-OBJECTIVES.txt – completion requirements
+**Method:** VirtualBox + Vagrant
 
-HINTS.txt – optional guidance
+### Install
 
-check.sh – grading script
+* VirtualBox
+* Vagrant
 
-Supported Platforms
+### Run a Lab
 
-The labs run inside Ubuntu. The method used to launch Ubuntu depends on your host system.
-
-Windows / Linux / Intel Mac
-
-Recommended method: VirtualBox + Vagrant
-
-Install:
-
-VirtualBox
-
-Vagrant
-
-Then:
-
+```bash
 git clone https://github.com/PracticalLinux/practical-linux-labs.git
 cd practical-linux-labs/labs/PL-000
 vagrant up
 vagrant ssh
+```
 
+### Reset
 
-To reset a lab:
-
+```bash
 vagrant destroy -f
 vagrant up
+```
 
-Apple Silicon (M1 / M2 / M3) Mac
+---
+
+## Apple Silicon (M1 / M2 / M3) Mac
 
 VirtualBox does not reliably support x86 Vagrant boxes on ARM Macs.
 
-Recommended method: UTM + Ubuntu ARM64
+**Method:** UTM + Ubuntu ARM64
 
-Install UTM.
+### Setup
 
-Create an Ubuntu ARM64 VM (22.04 or 24.04 recommended).
+1. Install UTM.
+2. Create an Ubuntu ARM64 VM (22.04 or 24.04 recommended).
+3. Inside the VM:
 
-Inside the VM:
-
+```bash
 sudo mkdir -p /lab
 git clone https://github.com/PracticalLinux/practical-linux-labs.git
 sudo cp -r practical-linux-labs/labs/PL-000/lab /lab
 sudo chmod +x /lab/check.sh
+```
 
+Use UTM snapshots to reset the environment.
 
-Use UTM snapshots to reset the environment when needed.
+---
 
-Lab Structure
+# Lab Layout
 
 Each lab lives in:
 
+```
 labs/PL-XXX/
+```
 
+Structure:
 
-Inside each lab:
-
+```
 Vagrantfile
 provision.sh
 lab/
+```
 
+Inside the VM:
 
-Inside /lab (in the VM):
-
-LAB_INFO.txt
-README.txt
-OBJECTIVES.txt
-HINTS.txt
-SIDE_QUESTS.txt
-check.sh
-assets/
-
+```
+/lab
+├── LAB_INFO.txt
+├── README.txt
+├── OBJECTIVES.txt
+├── HINTS.txt
+├── SIDE_QUESTS.txt
+├── check.sh
+└── assets/
+```
 
 The only authoritative completion check is:
 
+```bash
 /lab/check.sh
+```
 
-Requirements
+---
 
-Minimum host requirements:
+# System Requirements
 
-8 GB RAM recommended
+Recommended:
 
-Hardware virtualization enabled
+* 8 GB RAM
+* Hardware virtualization enabled
+* 10 GB free disk space
 
-~10 GB free disk space
+VM defaults:
 
-The VM itself typically uses:
+* 2 GB RAM
+* 1–2 CPUs
 
-2 GB RAM
+---
 
-1–2 CPUs
+# Resetting a Lab
 
-What These Labs Are
+### VirtualBox + Vagrant
 
-Terminal-first
-
-Resettable
-
-Designed for repetition
-
-Built to encourage exploration
-
-Offline-capable
-
-What These Labs Are Not
-
-GUI tutorials
-
-Multiple-choice quizzes
-
-Browser-based sandboxes
-
-Cloud-dependent
-
-Resetting a Lab
-
-VirtualBox + Vagrant:
-
+```bash
 vagrant destroy -f
 vagrant up
+```
 
+### UTM
 
-UTM:
+* Revert to a snapshot
+* Or re-copy `/lab`
 
-Revert to a snapshot
+---
 
-Or re-copy /lab
+# Design Principles
 
-Notes
+These labs are:
 
-The grading script checks system state. It does not track time or activity.
+* Terminal-first
+* Resettable
+* Offline-capable
+* Exploration-friendly
 
-Hidden files and side quests are optional.
+These labs are not:
 
-Labs are provider-agnostic; the transport method does not change lab behavior.
+* GUI tutorials
+* Multiple-choice quizzes
+* Browser sandboxes
+* Cloud-dependent
 
-If you encounter issues specific to a virtualization provider, open an issue and include:
+---
 
-Host OS
+# Reporting Issues
 
-Virtualization method
+If something fails, open an issue and include:
 
-Ubuntu version
-
-Full terminal output
+* Host OS
+* Virtualization method
+* Ubuntu version
+* Full terminal output
